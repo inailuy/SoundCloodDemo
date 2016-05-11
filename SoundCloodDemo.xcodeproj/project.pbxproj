@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		3363E8091CD329E4008B5BED /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3363E8081CD329E4008B5BED /* AppDelegate.swift */; };
-		3363E80B1CD329E4008B5BED /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3363E80A1CD329E4008B5BED /* ViewController.swift */; };
 		3363E80E1CD329E4008B5BED /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3363E80C1CD329E4008B5BED /* Main.storyboard */; };
 		3363E8111CD329E4008B5BED /* SoundCloodDemo.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3363E80F1CD329E4008B5BED /* SoundCloodDemo.xcdatamodeld */; };
 		3363E8131CD329E4008B5BED /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3363E8121CD329E4008B5BED /* Assets.xcassets */; };
@@ -18,12 +17,14 @@
 		3363E8261CD33379008B5BED /* LikedTrackObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 3363E8251CD33378008B5BED /* LikedTrackObject.m */; };
 		3363E8281CD3340C008B5BED /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3363E8271CD3340C008B5BED /* MediaPlayer.framework */; };
 		3363E82A1CD33411008B5BED /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3363E8291CD33411008B5BED /* AVFoundation.framework */; };
+		3392B3C91CD3F0AE004F1477 /* SearchVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3392B3C81CD3F0AE004F1477 /* SearchVC.swift */; };
+		3392B3CB1CD3F0B7004F1477 /* LikesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3392B3CA1CD3F0B7004F1477 /* LikesVC.swift */; };
+		3392B3CD1CD3F0CA004F1477 /* BaseVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3392B3CC1CD3F0CA004F1477 /* BaseVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		3363E8051CD329E4008B5BED /* SoundCloodDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SoundCloodDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3363E8081CD329E4008B5BED /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		3363E80A1CD329E4008B5BED /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		3363E80D1CD329E4008B5BED /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		3363E8101CD329E4008B5BED /* SoundCloodDemo.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = SoundCloodDemo.xcdatamodel; sourceTree = "<group>"; };
 		3363E8121CD329E4008B5BED /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -38,6 +39,9 @@
 		3363E8251CD33378008B5BED /* LikedTrackObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LikedTrackObject.m; sourceTree = "<group>"; };
 		3363E8271CD3340C008B5BED /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
 		3363E8291CD33411008B5BED /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		3392B3C81CD3F0AE004F1477 /* SearchVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchVC.swift; sourceTree = "<group>"; };
+		3392B3CA1CD3F0B7004F1477 /* LikesVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LikesVC.swift; sourceTree = "<group>"; };
+		3392B3CC1CD3F0CA004F1477 /* BaseVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,6 +61,7 @@
 			isa = PBXGroup;
 			children = (
 				3363E8071CD329E4008B5BED /* SoundCloodDemo */,
+				3363E8141CD329E4008B5BED /* LaunchScreen.storyboard */,
 				3363E8061CD329E4008B5BED /* Products */,
 				3363E8291CD33411008B5BED /* AVFoundation.framework */,
 				3363E8271CD3340C008B5BED /* MediaPlayer.framework */,
@@ -75,10 +80,11 @@
 			isa = PBXGroup;
 			children = (
 				3363E8081CD329E4008B5BED /* AppDelegate.swift */,
-				3363E80A1CD329E4008B5BED /* ViewController.swift */,
 				3363E80C1CD329E4008B5BED /* Main.storyboard */,
 				3363E8121CD329E4008B5BED /* Assets.xcassets */,
-				3363E8141CD329E4008B5BED /* LaunchScreen.storyboard */,
+				3392B3CC1CD3F0CA004F1477 /* BaseVC.swift */,
+				3392B3CA1CD3F0B7004F1477 /* LikesVC.swift */,
+				3392B3C81CD3F0AE004F1477 /* SearchVC.swift */,
 				3363E8171CD329E4008B5BED /* Info.plist */,
 				3363E80F1CD329E4008B5BED /* SoundCloodDemo.xcdatamodeld */,
 				3363E8241CD33378008B5BED /* LikedTrackObject.h */,
@@ -164,11 +170,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				3363E8261CD33379008B5BED /* LikedTrackObject.m in Sources */,
-				3363E80B1CD329E4008B5BED /* ViewController.swift in Sources */,
+				3392B3CB1CD3F0B7004F1477 /* LikesVC.swift in Sources */,
 				3363E8111CD329E4008B5BED /* SoundCloodDemo.xcdatamodeld in Sources */,
+				3392B3CD1CD3F0CA004F1477 /* BaseVC.swift in Sources */,
 				3363E8091CD329E4008B5BED /* AppDelegate.swift in Sources */,
 				3363E8201CD332E7008B5BED /* SoundCloud.m in Sources */,
 				3363E8231CD33352008B5BED /* JSONKit.m in Sources */,
+				3392B3C91CD3F0AE004F1477 /* SearchVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -189,6 +197,7 @@
 				3363E8151CD329E4008B5BED /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			path = SoundCloodDemo;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -323,6 +332,7 @@
 				3363E81C1CD329E4008B5BED /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
