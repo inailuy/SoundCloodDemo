@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		335FF80E1CE4126F00172040 /* DataWorker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 335FF80D1CE4126F00172040 /* DataWorker.swift */; };
+		335FF8111CE51AEA00172040 /* Track+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 335FF80F1CE51AEA00172040 /* Track+CoreDataProperties.swift */; };
+		335FF8121CE51AEA00172040 /* Track.swift in Sources */ = {isa = PBXBuildFile; fileRef = 335FF8101CE51AEA00172040 /* Track.swift */; };
+		335FF8151CE8168600172040 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 335FF8141CE8168600172040 /* Reachability.m */; };
 		3363E8091CD329E4008B5BED /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3363E8081CD329E4008B5BED /* AppDelegate.swift */; };
 		3363E80E1CD329E4008B5BED /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3363E80C1CD329E4008B5BED /* Main.storyboard */; };
 		3363E8111CD329E4008B5BED /* SoundCloodDemo.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3363E80F1CD329E4008B5BED /* SoundCloodDemo.xcdatamodeld */; };
@@ -23,6 +27,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		335FF80D1CE4126F00172040 /* DataWorker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataWorker.swift; sourceTree = "<group>"; };
+		335FF80F1CE51AEA00172040 /* Track+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Track+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		335FF8101CE51AEA00172040 /* Track.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Track.swift; sourceTree = "<group>"; };
+		335FF8131CE8168600172040 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
+		335FF8141CE8168600172040 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		3363E8051CD329E4008B5BED /* SoundCloodDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SoundCloodDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3363E8081CD329E4008B5BED /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3363E80D1CD329E4008B5BED /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -85,15 +94,20 @@
 				3392B3CC1CD3F0CA004F1477 /* BaseVC.swift */,
 				3392B3CA1CD3F0B7004F1477 /* LikesVC.swift */,
 				3392B3C81CD3F0AE004F1477 /* SearchVC.swift */,
-				3363E8171CD329E4008B5BED /* Info.plist */,
-				3363E80F1CD329E4008B5BED /* SoundCloodDemo.xcdatamodeld */,
+				335FF80D1CE4126F00172040 /* DataWorker.swift */,
+				335FF80F1CE51AEA00172040 /* Track+CoreDataProperties.swift */,
+				335FF8101CE51AEA00172040 /* Track.swift */,
 				3363E8241CD33378008B5BED /* LikedTrackObject.h */,
 				3363E8251CD33378008B5BED /* LikedTrackObject.m */,
 				3363E81E1CD332E7008B5BED /* SoundCloud.h */,
 				3363E81F1CD332E7008B5BED /* SoundCloud.m */,
 				3363E8211CD33352008B5BED /* JSONKit.h */,
 				3363E8221CD33352008B5BED /* JSONKit.m */,
+				3363E8171CD329E4008B5BED /* Info.plist */,
+				3363E80F1CD329E4008B5BED /* SoundCloodDemo.xcdatamodeld */,
 				3363E81D1CD332E6008B5BED /* SoundCloodDemo-Bridging-Header.h */,
+				335FF8131CE8168600172040 /* Reachability.h */,
+				335FF8141CE8168600172040 /* Reachability.m */,
 			);
 			path = SoundCloodDemo;
 			sourceTree = "<group>";
@@ -170,12 +184,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				3363E8261CD33379008B5BED /* LikedTrackObject.m in Sources */,
+				335FF8121CE51AEA00172040 /* Track.swift in Sources */,
 				3392B3CB1CD3F0B7004F1477 /* LikesVC.swift in Sources */,
 				3363E8111CD329E4008B5BED /* SoundCloodDemo.xcdatamodeld in Sources */,
+				335FF8111CE51AEA00172040 /* Track+CoreDataProperties.swift in Sources */,
 				3392B3CD1CD3F0CA004F1477 /* BaseVC.swift in Sources */,
 				3363E8091CD329E4008B5BED /* AppDelegate.swift in Sources */,
 				3363E8201CD332E7008B5BED /* SoundCloud.m in Sources */,
 				3363E8231CD33352008B5BED /* JSONKit.m in Sources */,
+				335FF80E1CE4126F00172040 /* DataWorker.swift in Sources */,
+				335FF8151CE8168600172040 /* Reachability.m in Sources */,
 				3392B3C91CD3F0AE004F1477 /* SearchVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

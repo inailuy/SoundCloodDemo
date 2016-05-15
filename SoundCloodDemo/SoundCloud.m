@@ -125,7 +125,6 @@
     NSString *jsonString =[NSString stringWithContentsOfURL:[NSURL URLWithString:[NSString stringWithFormat:@"https://api.soundcloud.com/me/favorites.json?oauth_token=%@&limit=%i",self.scToken, limit]] encoding:NSUTF8StringEncoding error:nil];
     NSMutableArray *musicArray =[jsonString objectFromJSONString];
     NSMutableArray *returnArray = [[NSMutableArray alloc]init];
-    NSLog(@"%@",jsonString);
     
     self.scTrackResultList = [[NSMutableArray alloc]init];
     for(int i=0; i< musicArray.count;i++)

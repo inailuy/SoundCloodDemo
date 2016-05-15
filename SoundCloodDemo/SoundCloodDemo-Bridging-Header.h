@@ -4,3 +4,5 @@
 
 #import "SoundCloud.h"
 #import "JSONKit.h"
+#import "LikedTrackObject.h"
+#import "Reachability.h"
