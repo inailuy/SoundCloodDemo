@@ -13,6 +13,7 @@ class LikesVC: BaseVC, UITableViewDataSource, UITableViewDelegate {
     
     @IBOutlet weak var tableView: UITableView!
     var userFavorites = [Track]()
+    var imageDictionary = NSMutableDictionary()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,13 +55,33 @@ class LikesVC: BaseVC, UITableViewDataSource, UITableViewDelegate {
         
         let trackObj = userFavorites[indexPath.row]
         cell?.textLabel?.text = trackObj.title
-        //[cell.imageView setImageWithURL:trackObj.artworkURL placeholderImage:[UIImage imageNamed:@"Icon"]];
-
+        if trackObj.artworkURL != nil {
+            if let image = self.imageDictionary.valueForKey(trackObj.artworkURL!) {
+                cell!.imageView!.image = image as? UIImage
+            } else {
+                let priority = DISPATCH_QUEUE_PRIORITY_DEFAULT
+                dispatch_async(dispatch_get_global_queue(priority, 0)) {
+                    let url = NSURL(string: trackObj.artworkURL!)
+                    // Nice snippet for loading images asynchronously
+                    // http://stackoverflow.com/questions/24231680/loading-downloading-image-from-url-on-swift
+                    DataWorker.sharedInstance.getDataFromUrl(url!) { (data, response, error)  in
+                        dispatch_async(dispatch_get_main_queue()) { () -> Void in
+                            guard let data = data where error == nil else { return }
+                            let image = UIImage(data: data)
+                            cell!.imageView!.image = image
+                            self.imageDictionary.setValue(image, forKey: trackObj.artworkURL!)
+                        }
+                    }
+                }
+            }
+        }
         
         return cell!
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         //
+        let trackObj = userFavorites[indexPath.row]
+        AudioPlayer.sharedInstance.playSongFromURL(NSURL(string: trackObj.streamURL!)!)
     }
 }

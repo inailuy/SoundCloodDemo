@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 class BaseVC: UIViewController {
-    let activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.White)
+    let activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.Gray)
     var soundCloud : SoundCloud!
     
     override func viewDidLoad() {        
