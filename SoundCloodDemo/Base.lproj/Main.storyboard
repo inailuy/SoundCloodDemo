@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--Navigation Controller-->
@@ -34,18 +35,48 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="80" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="oaw-lU-5Wx">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelectionDuringEditing="YES" rowHeight="250" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="oaw-lU-5Wx">
+                                <rect key="frame" x="0.0" y="85" width="600" height="600"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <color key="separatorColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="separatorColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="sectionIndexBackgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="id" rowHeight="80" id="MbQ-SZ-6s7">
-                                        <rect key="frame" x="0.0" y="92" width="600" height="80"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="id" rowHeight="250" id="MbQ-SZ-6s7">
+                                        <rect key="frame" x="0.0" y="92" width="600" height="250"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="MbQ-SZ-6s7" id="BhN-OP-3Fe">
-                                            <rect key="frame" x="0.0" y="0.0" width="600" height="79.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="250"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" tag="100" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="AX7-dh-B9E">
+                                                    <rect key="frame" x="0.0" y="0.0" width="600" height="250"/>
+                                                </imageView>
+                                                <view tag="102" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="35h-Nt-cmL">
+                                                    <rect key="frame" x="0.0" y="211" width="600" height="40"/>
+                                                    <color key="backgroundColor" white="1" alpha="0.52752850506756754" colorSpace="calibratedWhite"/>
+                                                </view>
+                                                <label opaque="NO" userInteractionEnabled="NO" tag="101" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.59999999999999998" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="q6c-fc-Z0I">
+                                                    <rect key="frame" x="8" y="214" width="584" height="30"/>
+                                                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.5" colorSpace="calibratedRGB"/>
+                                                    <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="16"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="35h-Nt-cmL" firstAttribute="trailing" secondItem="AX7-dh-B9E" secondAttribute="trailing" id="BrY-d8-Nvq"/>
+                                                <constraint firstItem="q6c-fc-Z0I" firstAttribute="top" secondItem="BhN-OP-3Fe" secondAttribute="topMargin" constant="206" id="CMb-iX-lfM"/>
+                                                <constraint firstItem="35h-Nt-cmL" firstAttribute="top" secondItem="q6c-fc-Z0I" secondAttribute="top" constant="-3" id="D0h-wN-7QI"/>
+                                                <constraint firstAttribute="trailing" secondItem="AX7-dh-B9E" secondAttribute="trailing" id="Etu-A7-2AO"/>
+                                                <constraint firstItem="35h-Nt-cmL" firstAttribute="leading" secondItem="AX7-dh-B9E" secondAttribute="leading" id="JxR-dS-thH"/>
+                                                <constraint firstItem="AX7-dh-B9E" firstAttribute="top" secondItem="BhN-OP-3Fe" secondAttribute="top" id="WsK-Uz-QGt"/>
+                                                <constraint firstItem="q6c-fc-Z0I" firstAttribute="leading" secondItem="BhN-OP-3Fe" secondAttribute="leadingMargin" id="bxy-9a-9v6"/>
+                                                <constraint firstItem="35h-Nt-cmL" firstAttribute="bottom" secondItem="AX7-dh-B9E" secondAttribute="bottom" constant="1" id="dSZ-PF-Cfe"/>
+                                                <constraint firstItem="AX7-dh-B9E" firstAttribute="leading" secondItem="BhN-OP-3Fe" secondAttribute="leading" id="esA-6d-RGB"/>
+                                                <constraint firstItem="q6c-fc-Z0I" firstAttribute="centerX" secondItem="AX7-dh-B9E" secondAttribute="centerX" id="lgV-b4-gbB"/>
+                                                <constraint firstItem="AX7-dh-B9E" firstAttribute="centerY" secondItem="BhN-OP-3Fe" secondAttribute="centerY" id="nbk-g4-CON"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="q6c-fc-Z0I" secondAttribute="bottom" constant="-2" id="ncZ-P8-da4"/>
+                                            </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     </tableViewCell>
@@ -64,13 +95,7 @@
                             <constraint firstItem="oaw-lU-5Wx" firstAttribute="top" secondItem="9pz-fx-drB" secondAttribute="top" id="zXb-za-4o1"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Likes" id="SEd-R9-EPC">
-                        <barButtonItem key="rightBarButtonItem" systemItem="refresh" id="ms4-iZ-mCi">
-                            <connections>
-                                <action selector="refreashButtonPressed:" destination="s4p-Qt-J2V" id="2e8-AW-SM7"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="Likes" id="SEd-R9-EPC"/>
                     <connections>
                         <outlet property="tableView" destination="oaw-lU-5Wx" id="hOD-sA-Vdn"/>
                     </connections>

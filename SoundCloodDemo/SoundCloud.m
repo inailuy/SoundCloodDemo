@@ -48,13 +48,16 @@
         {
         dispatch_async(dispatch_get_main_queue(), ^(void)
                        {
-                           //[self openLoginViewController];
-                           [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"https://soundcloud.com/connect?scope=non-expiring&client_id=%@&redirect_uri=%@&response_type=code",CLIENT_ID,REDIRECT_URI]]];
+                           [[NSNotificationCenter defaultCenter] postNotificationName:@"TRIGGER_ALERT" object:@"Please login to SoundCloud"];
                        });
         return false;
         }
     }
     
+}
+
+-(void) performLogin {
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:[NSString stringWithFormat:@"https://soundcloud.com/connect?scope=non-expiring&client_id=%@&redirect_uri=%@&response_type=code",CLIENT_ID,REDIRECT_URI]]];
 }
 
 

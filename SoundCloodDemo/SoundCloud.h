@@ -41,6 +41,7 @@
 -(NSMutableArray *) getUserFavorites;
 -(void) loadLikedTrackArray;
 -(BOOL) login;
+-(void) performLogin;
 
 -(void) favoriteTrack:(NSNumber *)idValue;
 -(void) deleteTrack:(NSNumber *)idValue;

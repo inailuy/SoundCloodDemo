@@ -20,6 +20,7 @@ extension Track {
     @NSManaged var artworkURL: String?
     @NSManaged var title: String?
     @NSManaged var streamable: NSNumber?
+    @NSManaged var idValue: NSNumber?
     
     func addValues(likedTrackObject: LikedTrackObject) {
         if likedTrackObject.streamURL != nil {
@@ -39,6 +40,9 @@ extension Track {
         }
         if likedTrackObject.streamable != nil {
             streamable = likedTrackObject.streamable
+        }
+        if likedTrackObject.idValue != nil {
+            idValue = likedTrackObject.idValue
         }
     }
 }

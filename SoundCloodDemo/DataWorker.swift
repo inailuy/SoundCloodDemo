@@ -9,6 +9,8 @@
 import Foundation
 import UIKit
 import CoreData
+import CoreSpotlight
+import MobileCoreServices
 
 class DataWorker {
     static let sharedInstance = DataWorker()
@@ -31,7 +33,7 @@ class DataWorker {
  
     func startSoundcloud() {
         if !hasConnectivity() {
-            NSNotificationCenter.defaultCenter().postNotificationName("NO_INTERNET", object: nil)
+            NSNotificationCenter.defaultCenter().postNotificationName("TRIGGER_ALERT", object: "No Internet Connection")
             return
         }
         
@@ -67,7 +69,7 @@ class DataWorker {
         if tracks.count > 0 {
             for track in tracks as [Track] {
                 if newArray.contains(track) == false{
-                    appDelegate.managedObjectContext.deleteObject(track)
+                    deleteTrack(track, shouldSave: false)
                 }
             }
         }
@@ -99,6 +101,7 @@ class DataWorker {
         let managedContext = appDelegate.managedObjectContext
         let track = NSEntityDescription.insertNewObjectForEntityForName("Track", inManagedObjectContext: managedContext) as! Track
         track.addValues(likedTrackObject)
+        addTrackToSpotlight(track)
         do {
             try managedContext.save()
         } catch let error as NSError  {
@@ -106,6 +109,18 @@ class DataWorker {
         }
         
         return track
+    }
+    
+    func deleteTrack(track:Track, shouldSave: Bool) {
+        deleteFromSpotlight(track)
+        appDelegate.managedObjectContext.deleteObject(track)
+        if shouldSave {
+            do {
+                try appDelegate.managedObjectContext.save()
+            } catch let error as NSError  {
+                print("Could not save \(error), \(error.userInfo)")
+            }
+        }
     }
     
     func getDataFromUrl(url:NSURL, completion: ((data: NSData?, response: NSURLResponse?, error: NSError? ) -> Void)) {
@@ -118,5 +133,23 @@ class DataWorker {
         let reachability: Reachability = Reachability.reachabilityForInternetConnection()
         let networkStatus: Int = reachability.currentReachabilityStatus().rawValue
         return networkStatus != 0
+    }
+    
+    func addTrackToSpotlight(track: Track) {
+        let attributeSet = CSSearchableItemAttributeSet(itemContentType: kUTTypeMP3 as String)
+        let title = track.title
+
+        attributeSet.title = title
+        if track.artworkURL != nil {
+            let url = NSURL(string: track.artworkURL!)
+            attributeSet.thumbnailData = NSData(contentsOfURL: url!)
+        }
+        
+        let searchableItem = CSSearchableItem(uniqueIdentifier: title, domainIdentifier: track.artworkURL, attributeSet:attributeSet)
+        CSSearchableIndex.defaultSearchableIndex().indexSearchableItems([searchableItem], completionHandler: nil)
+    }
+    
+    func deleteFromSpotlight(track:Track) {
+        CSSearchableIndex.defaultSearchableIndex().deleteSearchableItemsWithIdentifiers([track.title!], completionHandler: nil)
     }
 }

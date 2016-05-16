@@ -12,6 +12,8 @@
 		335FF8121CE51AEA00172040 /* Track.swift in Sources */ = {isa = PBXBuildFile; fileRef = 335FF8101CE51AEA00172040 /* Track.swift */; };
 		335FF8151CE8168600172040 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 335FF8141CE8168600172040 /* Reachability.m */; };
 		335FF8171CE83D3000172040 /* AudioPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 335FF8161CE83D3000172040 /* AudioPlayer.swift */; };
+		335FF85C1CE9B3B200172040 /* CoreSpotlight.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 335FF85B1CE9B3B200172040 /* CoreSpotlight.framework */; };
+		335FF85E1CE9B4AE00172040 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 335FF85D1CE9B4AE00172040 /* MobileCoreServices.framework */; };
 		3363E8091CD329E4008B5BED /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3363E8081CD329E4008B5BED /* AppDelegate.swift */; };
 		3363E80E1CD329E4008B5BED /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3363E80C1CD329E4008B5BED /* Main.storyboard */; };
 		3363E8111CD329E4008B5BED /* SoundCloodDemo.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3363E80F1CD329E4008B5BED /* SoundCloodDemo.xcdatamodeld */; };
@@ -34,6 +36,8 @@
 		335FF8131CE8168600172040 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		335FF8141CE8168600172040 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
 		335FF8161CE83D3000172040 /* AudioPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioPlayer.swift; sourceTree = "<group>"; };
+		335FF85B1CE9B3B200172040 /* CoreSpotlight.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreSpotlight.framework; path = System/Library/Frameworks/CoreSpotlight.framework; sourceTree = SDKROOT; };
+		335FF85D1CE9B4AE00172040 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		3363E8051CD329E4008B5BED /* SoundCloodDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SoundCloodDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3363E8081CD329E4008B5BED /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3363E80D1CD329E4008B5BED /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -60,6 +64,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				335FF85E1CE9B4AE00172040 /* MobileCoreServices.framework in Frameworks */,
+				335FF85C1CE9B3B200172040 /* CoreSpotlight.framework in Frameworks */,
 				3363E82A1CD33411008B5BED /* AVFoundation.framework in Frameworks */,
 				3363E8281CD3340C008B5BED /* MediaPlayer.framework in Frameworks */,
 			);
@@ -74,6 +80,8 @@
 				3363E8071CD329E4008B5BED /* SoundCloodDemo */,
 				3363E8141CD329E4008B5BED /* LaunchScreen.storyboard */,
 				3363E8061CD329E4008B5BED /* Products */,
+				335FF85D1CE9B4AE00172040 /* MobileCoreServices.framework */,
+				335FF85B1CE9B3B200172040 /* CoreSpotlight.framework */,
 				3363E8291CD33411008B5BED /* AVFoundation.framework */,
 				3363E8271CD3340C008B5BED /* MediaPlayer.framework */,
 			);

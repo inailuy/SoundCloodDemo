@@ -10,28 +10,33 @@ import Foundation
 import UIKit
 
 class LikesVC: BaseVC, UITableViewDataSource, UITableViewDelegate {
+    let IMAGE_TAG = 100
+    let LABEL_TAG = 101
+    let CELL_ID = "id"
     
     @IBOutlet weak var tableView: UITableView!
     var userFavorites = [Track]()
     var imageDictionary = NSMutableDictionary()
+    let refreshControl = UIRefreshControl()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         activityIndicator.frame = view.frame
         view.addSubview(activityIndicator)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(loadData), name: "FINISHED_SOUNDCLOUD", object: nil)
+
+        refreshControl.addTarget(self, action: #selector(LikesVC.refreshTableView(_:)), forControlEvents: .ValueChanged)
+        tableView.addSubview(refreshControl)
     }
+    
     override func viewWillAppear(animated: Bool) {
         loadData()
     }
     
-    @IBAction func refreashButtonPressed(sender: AnyObject) {
-        activityIndicator.startAnimating()
-        DataWorker.sharedInstance.startSoundcloud()
-    }
-    
     func loadData() {
         activityIndicator.stopAnimating()
+        self.refreshControl.endRefreshing()
         DataWorker.sharedInstance.fetchAllTracks({ (array: NSArray) in
             if !array.isEqualToArray(self.userFavorites) {
                 self.userFavorites = array as! [Track]
@@ -41,23 +46,25 @@ class LikesVC: BaseVC, UITableViewDataSource, UITableViewDelegate {
             }
         })
     }
-    
     //MARK: - TableView Delegate/DataSource
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return userFavorites.count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        var cell = tableView.dequeueReusableCellWithIdentifier("id")
+        var cell = tableView.dequeueReusableCellWithIdentifier(CELL_ID)
         if cell == nil {
-            cell = UITableViewCell(style: .Subtitle, reuseIdentifier: "id")
+            cell = UITableViewCell(style: .Default, reuseIdentifier: CELL_ID)
         }
-        
         let trackObj = userFavorites[indexPath.row]
-        cell?.textLabel?.text = trackObj.title
+        
+        let imageView = cell?.viewWithTag(IMAGE_TAG) as! UIImageView
+        let label = cell?.viewWithTag(LABEL_TAG) as! UILabel
+        label.text = trackObj.title
+
         if trackObj.artworkURL != nil {
             if let image = self.imageDictionary.valueForKey(trackObj.artworkURL!) {
-                cell!.imageView!.image = image as? UIImage
+                imageView.image = image as? UIImage
             } else {
                 let priority = DISPATCH_QUEUE_PRIORITY_DEFAULT
                 dispatch_async(dispatch_get_global_queue(priority, 0)) {
@@ -68,20 +75,39 @@ class LikesVC: BaseVC, UITableViewDataSource, UITableViewDelegate {
                         dispatch_async(dispatch_get_main_queue()) { () -> Void in
                             guard let data = data where error == nil else { return }
                             let image = UIImage(data: data)
-                            cell!.imageView!.image = image
+                            imageView.image = image
                             self.imageDictionary.setValue(image, forKey: trackObj.artworkURL!)
                         }
                     }
                 }
             }
         }
-        
         return cell!
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        //
         let trackObj = userFavorites[indexPath.row]
         AudioPlayer.sharedInstance.playSongFromURL(NSURL(string: trackObj.streamURL!)!)
+        
+        let cell = tableView.cellForRowAtIndexPath(indexPath)
+        cell?.selected = false
+    }
+    
+    func refreshTableView(refreshControl: UIRefreshControl) {
+        DataWorker.sharedInstance.startSoundcloud()
+    }
+    
+    func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+        return true
+    }
+    
+    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        if (editingStyle == UITableViewCellEditingStyle.Delete) {
+            let track = userFavorites[indexPath.row]
+            userFavorites.removeAtIndex(indexPath.row)
+            soundCloud.deleteTrack(track.idValue)
+            DataWorker.sharedInstance.deleteTrack(track, shouldSave: true)
+            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Top)
+        }
     }
 }

@@ -17,7 +17,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         soundCloud = SoundCloud()
-        soundCloud.login()
         DataWorker.sharedInstance.startSoundcloud()
         return true
     }
@@ -27,6 +26,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             return false
         }
         checkForSoundCloudLogin(url.absoluteString)
+        DataWorker.sharedInstance.startSoundcloud()
         return true
     }
     

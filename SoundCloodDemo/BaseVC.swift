@@ -21,20 +21,25 @@ class BaseVC: UIViewController {
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(loadAlert), name: "NO_INTERNET", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(BaseVC.loadAlert(_:)), name: "TRIGGER_ALERT", object: nil)
     }
     
     override func viewDidDisappear(animated: Bool) {
         super.viewDidDisappear(animated)
         
-        NSNotificationCenter.defaultCenter().removeObserver(self, name: "NO_INTERNET", object: nil)
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: "TRIGGER_ALERT", object: nil)
     }
     
-    func loadAlert() {
-        let alertController = UIAlertController(title: "Error", message: "No Internet Connection", preferredStyle: .Alert)
+    func loadAlert(notification:NSNotification) {
+        let message = notification.object as! String
+        
+        let alertController = UIAlertController(title: "Error", message: message, preferredStyle: .Alert)
         let OKAction = UIAlertAction(title: "OK", style: .Default) { (action) in
-            // ...
-            self.activityIndicator.stopAnimating()
+            if message == "Please login to SoundCloud" {
+                self.soundCloud.performLogin()
+            } else {
+                self.activityIndicator.stopAnimating()
+            }
         }
         alertController.addAction(OKAction)
         self.presentViewController(alertController, animated: true) {}
