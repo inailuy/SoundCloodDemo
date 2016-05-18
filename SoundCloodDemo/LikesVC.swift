@@ -18,7 +18,6 @@ class LikesVC: BaseVC, UITableViewDataSource, UITableViewDelegate {
     
     @IBOutlet weak var tableView: UITableView!
     var userFavorites = [Track]()
-    let refreshControl = UIRefreshControl()
     
     @IBOutlet weak var playBarButton: UIBarButtonItem!
     

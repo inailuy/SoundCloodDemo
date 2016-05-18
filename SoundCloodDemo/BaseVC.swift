@@ -14,6 +14,7 @@ class BaseVC: UIViewController {
     var soundCloud : SoundCloud!
     var imageDictionary = NSMutableDictionary()
     var appDelegate : AppDelegate!
+    let refreshControl = UIRefreshControl()
     
     override func viewDidLoad() {
         appDelegate = UIApplication.sharedApplication().delegate  as! AppDelegate

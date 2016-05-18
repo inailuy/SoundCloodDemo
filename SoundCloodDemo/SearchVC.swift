@@ -14,6 +14,15 @@ class SearchVC: BaseVC, UISearchBarDelegate, UICollectionViewDelegate, UICollect
     @IBOutlet weak var collectionView: UICollectionView!
     var searchQueryResults = NSMutableArray()
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        activityIndicator.frame = CGRectMake(view.frame.size.width/2 - 25, view.frame.size.height/2 - 25, 50, 50);
+        view.addSubview(activityIndicator)
+        
+        refreshControl.addTarget(self, action: #selector(SearchVC.refreshCollectionView(_:)), forControlEvents: .ValueChanged)
+        collectionView.addSubview(refreshControl)
+    }
+    
     //MARK: - TableView Delegate/DataSource
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return searchQueryResults.count
@@ -59,15 +68,26 @@ class SearchVC: BaseVC, UISearchBarDelegate, UICollectionViewDelegate, UICollect
         let array = NSArray(array: searchQueryResults) as! [LikedTrackObject]
         AudioPlayer.sharedInstance.playTrack(trackObj, with: array)
     }
+    
+    func refreshCollectionView(refreshControl: UIRefreshControl) {
+        handleQuery(searchBar.text!)
+    }
     //MARK: - UITextField Delegate
     func searchBarSearchButtonClicked(searchBar: UISearchBar) {
         view.window?.endEditing(true)
         
+        activityIndicator.startAnimating()
+        handleQuery(searchBar.text!)
+    }
+    
+    func handleQuery(searchText: String) {
         let priority = DISPATCH_QUEUE_PRIORITY_DEFAULT
         dispatch_async(dispatch_get_global_queue(priority, 0)) {
-            self.searchQueryResults = self.soundCloud.searchForTracksWithQuery(searchBar.text)
+            self.searchQueryResults = self.soundCloud.searchForTracksWithQuery(searchText)
             dispatch_async(dispatch_get_main_queue(), {
                 self.collectionView.reloadData()
+                self.activityIndicator.stopAnimating()
+                self.refreshControl.endRefreshing()
             })
         }
     }
