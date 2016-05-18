@@ -37,14 +37,12 @@ class SearchVC: BaseVC, UISearchBarDelegate, UICollectionViewDelegate, UICollect
         label.text = trackObj.title
         
         if trackObj.artworkURL != nil {
-            
             if let image = self.imageDictionary.valueForKey(trackObj.artworkURL.absoluteString) {
                 imageView.image = image as? UIImage
             } else {
                 let priority = DISPATCH_QUEUE_PRIORITY_DEFAULT
                 dispatch_async(dispatch_get_global_queue(priority, 0)) {
                     let url = trackObj.artworkURL
-                    
                     // Nice snippet for loading images asynchronously
                     // http://stackoverflow.com/questions/24231680/loading-downloading-image-from-url-on-swift
                     DataWorker.sharedInstance.getDataFromUrl(url!) { (data, response, error)  in
@@ -58,6 +56,8 @@ class SearchVC: BaseVC, UISearchBarDelegate, UICollectionViewDelegate, UICollect
                     }
                 }
             }
+        } else {
+            imageView.image = UIImage()
         }
         
         return cell
