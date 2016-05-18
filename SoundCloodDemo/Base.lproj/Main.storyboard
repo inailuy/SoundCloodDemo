@@ -45,7 +45,7 @@
                                         <rect key="frame" x="0.0" y="92" width="600" height="250"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="MbQ-SZ-6s7" id="BhN-OP-3Fe">
-                                            <rect key="frame" x="0.0" y="0.0" width="600" height="250"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="249.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" tag="100" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="AX7-dh-B9E">
@@ -95,8 +95,15 @@
                             <constraint firstItem="oaw-lU-5Wx" firstAttribute="top" secondItem="9pz-fx-drB" secondAttribute="top" id="zXb-za-4o1"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Likes" id="SEd-R9-EPC"/>
+                    <navigationItem key="navigationItem" title="Likes" id="SEd-R9-EPC">
+                        <barButtonItem key="rightBarButtonItem" title=" " id="Vdi-8Y-nbH">
+                            <connections>
+                                <action selector="playBarButtonPressed:" destination="s4p-Qt-J2V" id="FOc-Rz-ZOq"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
+                        <outlet property="playBarButton" destination="Vdi-8Y-nbH" id="R6X-qL-irG"/>
                         <outlet property="tableView" destination="oaw-lU-5Wx" id="hOD-sA-Vdn"/>
                     </connections>
                 </viewController>

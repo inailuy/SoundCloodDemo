@@ -37,6 +37,7 @@ class AudioPlayer : NSObject {
         player = AVPlayer(playerItem: playerItem)
         player.play()
         isPlaying = true
+        NSNotificationCenter.defaultCenter().postNotificationName("RATE_CHANGES", object: nil)
         player.addPeriodicTimeObserverForInterval(CMTimeMake(1000,25000), queue: dispatch_get_main_queue()) {
             time in
             let seconds = Float(time.value) / Float(time.timescale)
@@ -84,7 +85,7 @@ class AudioPlayer : NSObject {
         } else {
             pause()
         }
-        //setMediaArtWorkFromContainer(currentLikedObject)
+        NSNotificationCenter.defaultCenter().postNotificationName("RATE_CHANGES", object: nil)
     }
     
     func play()  {

@@ -13,17 +13,21 @@ class LikesVC: BaseVC, UITableViewDataSource, UITableViewDelegate {
     let IMAGE_TAG = 100
     let LABEL_TAG = 101
     let CELL_ID = "id"
+    let PLAY = "PLAY"
+    let PAUSE = "PAUSE"
     
     @IBOutlet weak var tableView: UITableView!
     var userFavorites = [Track]()
     let refreshControl = UIRefreshControl()
     
+    @IBOutlet weak var playBarButton: UIBarButtonItem!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         activityIndicator.frame = view.frame
         view.addSubview(activityIndicator)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(loadData), name: "FINISHED_SOUNDCLOUD", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(rateChanged), name: "RATE_CHANGES", object: nil)
 
         refreshControl.addTarget(self, action: #selector(LikesVC.refreshTableView(_:)), forControlEvents: .ValueChanged)
         tableView.addSubview(refreshControl)
@@ -31,6 +35,18 @@ class LikesVC: BaseVC, UITableViewDataSource, UITableViewDelegate {
     
     override func viewWillAppear(animated: Bool) {
         loadData()
+    }
+    
+    @IBAction func playBarButtonPressed(sender: UIBarButtonItem) {
+        AudioPlayer.sharedInstance.pausePlayMusic()
+    }
+    
+    func rateChanged() {
+        if AudioPlayer.sharedInstance.player.rate == 0.0 {
+            playBarButton.title = PLAY
+        } else {
+            playBarButton.title = PAUSE
+        }
     }
     
     func loadData() {
