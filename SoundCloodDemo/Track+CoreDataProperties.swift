@@ -45,4 +45,30 @@ extension Track {
             idValue = likedTrackObject.idValue
         }
     }
+    
+    func createLikedObject() -> LikedTrackObject {
+        let likedObject = LikedTrackObject()
+        if streamURL != nil {
+            likedObject.streamURL = NSURL(string: streamURL!)
+        }
+        if createdAt != nil {
+            likedObject.createdAt = createdAt
+        }
+        if duration != nil {
+            likedObject.duration = duration
+        }
+        if artworkURL != nil {
+            likedObject.artworkURL = NSURL(string: artworkURL!)
+        }
+        if title != nil {
+            likedObject.title = title
+        }
+        if streamable != nil {
+            likedObject.streamable = streamable
+        }
+        if idValue != nil {
+            likedObject.idValue = idValue
+        }
+        return likedObject
+    }
 }

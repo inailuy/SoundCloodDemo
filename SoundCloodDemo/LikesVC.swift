@@ -16,7 +16,6 @@ class LikesVC: BaseVC, UITableViewDataSource, UITableViewDelegate {
     
     @IBOutlet weak var tableView: UITableView!
     var userFavorites = [Track]()
-    var imageDictionary = NSMutableDictionary()
     let refreshControl = UIRefreshControl()
     
     
@@ -86,9 +85,14 @@ class LikesVC: BaseVC, UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let trackObj = userFavorites[indexPath.row]
-        AudioPlayer.sharedInstance.playSongFromURL(NSURL(string: trackObj.streamURL!)!)
+        var array = [LikedTrackObject]()
+        for track in userFavorites {
+            array.append(track.createLikedObject())
+        }
         
+        let trackObj = array[indexPath.row]
+        AudioPlayer.sharedInstance.playTrack(trackObj, with: array)
+    
         let cell = tableView.cellForRowAtIndexPath(indexPath)
         cell?.selected = false
     }

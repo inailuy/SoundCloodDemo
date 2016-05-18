@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreData
+import AVFoundation
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -18,6 +19,31 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         soundCloud = SoundCloud()
         DataWorker.sharedInstance.startSoundcloud()
+        
+        try! AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayback, withOptions: [])
+        try! AVAudioSession.sharedInstance().setActive(true)
+        
+        NSNotificationCenter.defaultCenter().addObserver(AudioPlayer.sharedInstance, selector: #selector(AudioPlayer.sharedInstance.audioStateChanged), name:AVPlayerItemDidPlayToEndTimeNotification, object: nil)
+        
+        /*
+         [[NSNotificationCenter defaultCenter] addObserver:self.audioHandler
+         selector:@selector(audioStateChanged)
+         name:AVPlayerItemDidPlayToEndTimeNotification
+         object:nil];
+         
+         [[AVAudioSession sharedInstance] setDelegate: self];
+         [[AVAudioSession sharedInstance] setCategory: AVAudioSessionCategoryPlayback error: nil];
+         UInt32 doSetProperty = 0;
+         AudioSessionSetProperty (
+         kAudioSessionProperty_OverrideCategoryMixWithOthers,
+         sizeof (doSetProperty),
+         &doSetProperty
+         );
+         NSError *activationError = nil;
+         [[AVAudioSession sharedInstance] setActive:NO
+         error:&activationError];
+         */
+        
         return true
     }
     

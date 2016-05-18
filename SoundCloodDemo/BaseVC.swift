@@ -12,9 +12,11 @@ import UIKit
 class BaseVC: UIViewController {
     let activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.Gray)
     var soundCloud : SoundCloud!
+    var imageDictionary = NSMutableDictionary()
+    var appDelegate : AppDelegate!
     
-    override func viewDidLoad() {        
-        let appDelegate = UIApplication.sharedApplication().delegate  as! AppDelegate
+    override func viewDidLoad() {
+        appDelegate = UIApplication.sharedApplication().delegate  as! AppDelegate
         soundCloud = appDelegate.soundCloud
     }
     
@@ -22,12 +24,16 @@ class BaseVC: UIViewController {
         super.viewDidAppear(animated)
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(BaseVC.loadAlert(_:)), name: "TRIGGER_ALERT", object: nil)
+        UIApplication.sharedApplication().beginReceivingRemoteControlEvents()
+        becomeFirstResponder()
     }
     
     override func viewDidDisappear(animated: Bool) {
         super.viewDidDisappear(animated)
         
         NSNotificationCenter.defaultCenter().removeObserver(self, name: "TRIGGER_ALERT", object: nil)
+        UIApplication.sharedApplication().endReceivingRemoteControlEvents()
+        resignFirstResponder()
     }
     
     func loadAlert(notification:NSNotification) {
@@ -43,5 +49,13 @@ class BaseVC: UIViewController {
         }
         alertController.addAction(OKAction)
         self.presentViewController(alertController, animated: true) {}
+    }
+    
+    override func remoteControlReceivedWithEvent(event: UIEvent?) {
+        AudioPlayer.sharedInstance.remoteControlWithEvent(event!)
+    }
+    
+    override func canBecomeFirstResponder() -> Bool {
+        return true
     }
 }
