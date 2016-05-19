@@ -7,8 +7,8 @@ SoundCloodDemo is a iOS Application written in Swift that demostrates a bunch of
 
 ### Notable Features
 
-##
-### Frameworks Used
+
+# Frameworks Used
 - MobileCoreServices
 - CoreSpotlight
 - AVFoundation
