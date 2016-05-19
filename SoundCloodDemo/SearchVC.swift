@@ -42,6 +42,12 @@ class SearchVC: BaseVC, UISearchBarDelegate, UICollectionViewDelegate, UICollect
             if let image = self.imageDictionary.valueForKey(trackObj.artworkURL.absoluteString) {
                 imageView.image = image as? UIImage
             } else {
+                let indicator = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.Gray)
+                indicator.frame = cell.contentView.frame
+                cell.contentView.addSubview(indicator)
+                indicator.startAnimating()
+                imageView.hidden = true
+                
                 let priority = DISPATCH_QUEUE_PRIORITY_DEFAULT
                 dispatch_async(dispatch_get_global_queue(priority, 0)) {
                     let url = trackObj.artworkURL
@@ -49,10 +55,15 @@ class SearchVC: BaseVC, UISearchBarDelegate, UICollectionViewDelegate, UICollect
                     // http://stackoverflow.com/questions/24231680/loading-downloading-image-from-url-on-swift
                     DataWorker.sharedInstance.getDataFromUrl(url!) { (data, response, error)  in
                         dispatch_async(dispatch_get_main_queue()) { () -> Void in
-                            guard let data = data where error == nil else { return }
+                            guard let data = data where error == nil else {
+                                NSNotificationCenter.defaultCenter().postNotificationName("TRIGGER_ALERT", object: "Network timeout")
+                                return
+                            }
                             let image = UIImage(data: data)
                             imageView.image = image
                             self.imageDictionary.setValue(image, forKey: url.absoluteString)
+                            indicator.stopAnimating()
+                            imageView.hidden = false
                         }
                     }
                 }

@@ -71,7 +71,10 @@ class LikesVC: BaseVC, UITableViewDataSource, UITableViewDelegate {
                     // http://stackoverflow.com/questions/24231680/loading-downloading-image-from-url-on-swift
                     DataWorker.sharedInstance.getDataFromUrl(url!) { (data, response, error)  in
                         dispatch_async(dispatch_get_main_queue()) { () -> Void in
-                            guard let data = data where error == nil else { return }
+                            guard let data = data where error == nil else {
+                                NSNotificationCenter.defaultCenter().postNotificationName("TRIGGER_ALERT", object: "Network timeout")
+                                return
+                            }
                             let image = UIImage(data: data)
                             imageView.image = image
                             self.imageDictionary.setValue(image, forKey: trackObj.artworkURL!)

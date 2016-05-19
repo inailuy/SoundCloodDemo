@@ -65,7 +65,7 @@
     
     NSURL *url = [NSURL URLWithString:@"https://api.soundcloud.com/oauth2/token/"];
     NSString *postString =[NSString stringWithFormat:@"client_id=%@&client_secret=%@&grant_type=authorization_code&redirect_uri=%@&code=%@",CLIENT_ID,CLIENT_SECRET,REDIRECT_URI,code];
-    NSLog(@"post string: %@",postString);
+
     NSData *postData = [postString dataUsingEncoding:NSUTF8StringEncoding];
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
     [request setHTTPMethod:@"POST"];
@@ -74,7 +74,6 @@
     [request setHTTPBody:postData];
     NSData *returnData = [NSURLConnection sendSynchronousRequest: request returningResponse: nil error: nil];
     NSString *responseBody = [[NSString alloc] initWithData:returnData encoding:NSUTF8StringEncoding];
-    NSLog(@"response body; %@",responseBody);
     
     NSMutableDictionary *resultJSON =[responseBody objectFromJSONString];
     self.scToken=[resultJSON objectForKey:@"access_token"];
@@ -100,7 +99,6 @@
     NSString *jsonString =[NSString stringWithContentsOfURL:[NSURL URLWithString:[NSString stringWithFormat:@"https://api.soundcloud.com/me/tracks.json?oauth_token=%@",self.scToken]] encoding:NSUTF8StringEncoding error:nil];
     NSMutableArray *musicArray =[jsonString objectFromJSONString];
     NSMutableArray *returnArray = [[NSMutableArray alloc]init];
-    NSLog(@"%@",jsonString);
 
     self.scTrackResultList = [[NSMutableArray alloc]init];
     for(int i=0; i< musicArray.count;i++)
@@ -157,7 +155,6 @@
     query = [query stringByReplacingOccurrencesOfString:@" " withString:@"%20"];
     NSString *str = [NSString stringWithFormat:@"%@/tracks.json?oauth_token=%@&client_id=%@&q=%@",SC_API_URL,self.scToken,CLIENT_ID,query];
     NSString *jsonString =[NSString stringWithContentsOfURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/tracks.json?oauth_token=%@&client_id=%@&q=%@",SC_API_URL,self.scToken,CLIENT_ID,query]] encoding:NSUTF8StringEncoding error:nil];
-    NSLog(@"%@",jsonString);
     NSMutableArray *musicArray =[jsonString objectFromJSONString];
     self.scTrackResultList = [[NSMutableArray alloc]init];
     
@@ -206,8 +203,6 @@
                     [self.tracksFavorited addObject:likedObj];
 
             }
-            NSLog(@"%lu", (unsigned long)self.tracksFavorited.count);
-            
         }
         else
         {
@@ -236,7 +231,6 @@
     //[request setValue:@"multipart/form-data" forHTTPHeaderField:@"Content-Type"];
     NSData *returnData = [NSURLConnection sendSynchronousRequest: request returningResponse: nil error: nil];
     NSString *responseBody = [[NSString alloc] initWithData:returnData encoding:NSUTF8StringEncoding];
-    NSLog(@"response body; %@",responseBody);
 }
 
 -(void) deleteTrack:(NSNumber *)idValue
@@ -248,7 +242,6 @@
     //[request setValue:@"multipart/form-data" forHTTPHeaderField:@"Content-Type"];
     NSData *returnData = [NSURLConnection sendSynchronousRequest: request returningResponse: nil error: nil];
     NSString *responseBody = [[NSString alloc] initWithData:returnData encoding:NSUTF8StringEncoding];
-    NSLog(@"response body; %@",responseBody);
 }
 
 @end

@@ -20,7 +20,6 @@ class AudioPlayer : NSObject {
     var playerItem : AVPlayerItem!
     var likedObjects = [LikedTrackObject]()
     var currentLikedObject = LikedTrackObject()
-    var playerItemDictionary = NSMutableDictionary()
     //MARK: - Play
     func playTrack(track:LikedTrackObject, with array: [LikedTrackObject]?) {
         currentLikedObject = track
@@ -32,18 +31,8 @@ class AudioPlayer : NSObject {
     func playSongFromURL(songURL: NSURL) {
         let scToken = NSUserDefaults.standardUserDefaults().objectForKey(SC_TOKEN) as! String
         let songUrlString = String(format: "%@?oauth_token=%@", songURL.absoluteURL, scToken)
-        // Caching previous playerItems for later use
-        if let item = playerItemDictionary.valueForKey(songURL.absoluteString) {
-            playerItem = item as! AVPlayerItem
-        } else {
-            if !hasConnectivity() {
-                NSNotificationCenter.defaultCenter().postNotificationName("TRIGGER_ALERT", object: "No Internet Connection")
-                return
-            }
-            playerItem = AVPlayerItem(URL: NSURL(string: songUrlString)!)
-            playerItemDictionary.setValue(playerItem.copy(), forKey: songURL.absoluteString)
-        }
 
+        playerItem = AVPlayerItem(URL: NSURL(string: songUrlString)!)
         player = AVPlayer(playerItem: playerItem)
         player.play()
         isPlaying = true
