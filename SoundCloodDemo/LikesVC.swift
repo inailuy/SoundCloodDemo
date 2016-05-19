@@ -30,6 +30,13 @@ class LikesVC: BaseVC, UITableViewDataSource, UITableViewDelegate {
 
         refreshControl.addTarget(self, action: #selector(LikesVC.refreshTableView(_:)), forControlEvents: .ValueChanged)
         tableView.addSubview(refreshControl)
+        
+        let longPressRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(LikesVC.longPress(_:)))
+        self.view.addGestureRecognizer(longPressRecognizer)
+        
+        if userFavorites.count == 0  {
+            activityIndicator.startAnimating()
+        }
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -49,13 +56,13 @@ class LikesVC: BaseVC, UITableViewDataSource, UITableViewDelegate {
     }
     
     func loadData() {
-        activityIndicator.stopAnimating()
         self.refreshControl.endRefreshing()
         DataWorker.sharedInstance.fetchAllTracks({ (array: NSArray) in
             if !array.isEqualToArray(self.userFavorites) {
                 self.userFavorites = array as! [Track]
                 dispatch_async(dispatch_get_main_queue(), {
                     self.tableView.reloadData()
+                    self.activityIndicator.stopAnimating()
                 })
             }
         })
@@ -95,6 +102,8 @@ class LikesVC: BaseVC, UITableViewDataSource, UITableViewDelegate {
                     }
                 }
             }
+        } else {
+            imageView.image = UIImage()
         }
         return cell!
     }
@@ -127,6 +136,20 @@ class LikesVC: BaseVC, UITableViewDataSource, UITableViewDelegate {
             soundCloud.deleteTrack(track.idValue)
             DataWorker.sharedInstance.deleteTrack(track, shouldSave: true)
             tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Top)
+        }
+    }
+    
+    func longPress(longPressGestureRecognizer: UILongPressGestureRecognizer) {
+        if longPressGestureRecognizer.state == UIGestureRecognizerState.Began {
+            let touchPoint = longPressGestureRecognizer.locationInView(self.view)
+            if let indexPath = tableView.indexPathForRowAtPoint(touchPoint) {
+                let selectedTrack = userFavorites[indexPath.row]
+                let shareString = "Check this song out " + selectedTrack.title! + " " + selectedTrack.streamURL!
+                let activityView = UIActivityViewController(activityItems:[shareString], applicationActivities: nil)
+                activityView.excludedActivityTypes = [UIActivityTypePrint, UIActivityTypeAssignToContact, UIActivityTypeMail]
+                presentationController?.dismissalTransitionDidEnd(false)
+                presentViewController(activityView, animated: true, completion:nil)
+            }
         }
     }
 }

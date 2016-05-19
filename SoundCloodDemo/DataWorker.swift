@@ -44,6 +44,7 @@ class DataWorker {
     }
     
     @objc func loadSoundcloud() {
+        
         var newArray = [Track]()
         for likedTrackObject in appDelegate.soundCloud.tracksFavorited {
             let request = NSFetchRequest()
@@ -101,13 +102,11 @@ class DataWorker {
         let managedContext = appDelegate.managedObjectContext
         let track = NSEntityDescription.insertNewObjectForEntityForName("Track", inManagedObjectContext: managedContext) as! Track
         track.addValues(likedTrackObject)
-        addTrackToSpotlight(track)
-        do {
-            try managedContext.save()
-        } catch let error as NSError  {
-            print("Could not save \(error), \(error.userInfo)")
+        let priority = DISPATCH_QUEUE_PRIORITY_DEFAULT
+        dispatch_async(dispatch_get_global_queue(priority, 0)) {
+            self.addTrackToSpotlight(track)
         }
-        
+       
         return track
     }
     

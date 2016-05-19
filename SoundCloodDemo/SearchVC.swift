@@ -21,6 +21,9 @@ class SearchVC: BaseVC, UISearchBarDelegate, UICollectionViewDelegate, UICollect
         
         refreshControl.addTarget(self, action: #selector(SearchVC.refreshCollectionView(_:)), forControlEvents: .ValueChanged)
         collectionView.addSubview(refreshControl)
+        
+        let longPressRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(SearchVC.longPress(_:)))
+        self.view.addGestureRecognizer(longPressRecognizer)
     }
     
     //MARK: - TableView Delegate/DataSource
@@ -30,6 +33,8 @@ class SearchVC: BaseVC, UISearchBarDelegate, UICollectionViewDelegate, UICollect
     
     func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier("id", forIndexPath: indexPath)
+        cell.layer.borderWidth = 1
+        cell.layer.borderColor = UIColor.blackColor().CGColor
         
         let imageView = cell.viewWithTag(100) as! UIImageView
         let label = cell.viewWithTag(101) as! UILabel
@@ -71,6 +76,22 @@ class SearchVC: BaseVC, UISearchBarDelegate, UICollectionViewDelegate, UICollect
     
     func refreshCollectionView(refreshControl: UIRefreshControl) {
         handleQuery(searchBar.text!)
+    }
+    
+    func longPress(longPressGestureRecognizer: UILongPressGestureRecognizer) {
+        if longPressGestureRecognizer.state == UIGestureRecognizerState.Began {
+            let p = longPressGestureRecognizer.locationInView(self.collectionView)
+            let indexPath = self.collectionView.indexPathForItemAtPoint(p)
+            
+            if let index = indexPath {
+                let selectedTrack = searchQueryResults[index.row] as! LikedTrackObject
+                let shareString = "Check this song out " + selectedTrack.title! + " " + selectedTrack.streamURL.absoluteString
+                let activityView = UIActivityViewController(activityItems:[shareString], applicationActivities: nil)
+                activityView.excludedActivityTypes = [UIActivityTypePrint, UIActivityTypeAssignToContact, UIActivityTypeMail]
+                presentationController?.dismissalTransitionDidEnd(false)
+                presentViewController(activityView, animated: true, completion:nil)
+            }
+        }
     }
     //MARK: - UITextField Delegate
     func searchBarSearchButtonClicked(searchBar: UISearchBar) {

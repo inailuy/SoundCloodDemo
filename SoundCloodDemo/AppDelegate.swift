@@ -25,25 +25,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         NSNotificationCenter.defaultCenter().addObserver(AudioPlayer.sharedInstance, selector: #selector(AudioPlayer.sharedInstance.audioStateChanged), name:AVPlayerItemDidPlayToEndTimeNotification, object: nil)
         
-        /*
-         [[NSNotificationCenter defaultCenter] addObserver:self.audioHandler
-         selector:@selector(audioStateChanged)
-         name:AVPlayerItemDidPlayToEndTimeNotification
-         object:nil];
-         
-         [[AVAudioSession sharedInstance] setDelegate: self];
-         [[AVAudioSession sharedInstance] setCategory: AVAudioSessionCategoryPlayback error: nil];
-         UInt32 doSetProperty = 0;
-         AudioSessionSetProperty (
-         kAudioSessionProperty_OverrideCategoryMixWithOthers,
-         sizeof (doSetProperty),
-         &doSetProperty
-         );
-         NSError *activationError = nil;
-         [[AVAudioSession sharedInstance] setActive:NO
-         error:&activationError];
-         */
-        
         return true
     }
     

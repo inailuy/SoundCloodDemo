@@ -139,22 +139,23 @@
                                     <size key="itemSize" width="180" height="180"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                    <inset key="sectionInset" minX="0.0" minY="10" maxX="10" maxY="10"/>
+                                    <inset key="sectionInset" minX="5" minY="10" maxX="5" maxY="10"/>
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="id" id="djg-J1-x9Q">
-                                        <rect key="frame" x="0.0" y="10" width="180" height="180"/>
+                                        <rect key="frame" x="5" y="10" width="180" height="180"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="180" height="180"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" tag="100" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="57g-Ne-Prw">
-                                                    <rect key="frame" x="8" y="0.0" width="180" height="180"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="180" height="180"/>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" tag="101" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O2X-zy-Sxd">
                                                     <rect key="frame" x="24" y="151" width="148" height="21"/>
-                                                    <color key="backgroundColor" white="0.0" alpha="0.36446896114864863" colorSpace="calibratedWhite"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.44742398648648651" colorSpace="calibratedWhite"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
@@ -162,12 +163,13 @@
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstItem="O2X-zy-Sxd" firstAttribute="centerX" secondItem="57g-Ne-Prw" secondAttribute="centerX" id="D5X-RW-2A6"/>
-                                            <constraint firstAttribute="trailingMargin" secondItem="57g-Ne-Prw" secondAttribute="trailing" constant="-16" id="R5A-g3-s8x"/>
+                                            <constraint firstItem="O2X-zy-Sxd" firstAttribute="centerX" secondItem="57g-Ne-Prw" secondAttribute="centerX" constant="8" id="D5X-RW-2A6"/>
+                                            <constraint firstAttribute="trailingMargin" secondItem="57g-Ne-Prw" secondAttribute="trailing" constant="-8" id="R5A-g3-s8x"/>
                                             <constraint firstAttribute="bottom" secondItem="57g-Ne-Prw" secondAttribute="bottom" id="Y2K-D3-w4Z"/>
                                             <constraint firstItem="O2X-zy-Sxd" firstAttribute="trailing" secondItem="djg-J1-x9Q" secondAttribute="trailingMargin" id="YBE-k8-gmc"/>
-                                            <constraint firstItem="57g-Ne-Prw" firstAttribute="leading" secondItem="djg-J1-x9Q" secondAttribute="leadingMargin" id="ehb-TK-sYU"/>
+                                            <constraint firstItem="57g-Ne-Prw" firstAttribute="leading" secondItem="djg-J1-x9Q" secondAttribute="leadingMargin" constant="-8" id="ehb-TK-sYU"/>
                                             <constraint firstItem="57g-Ne-Prw" firstAttribute="top" secondItem="djg-J1-x9Q" secondAttribute="top" id="grr-wz-7zO"/>
                                             <constraint firstItem="O2X-zy-Sxd" firstAttribute="bottom" secondItem="djg-J1-x9Q" secondAttribute="bottomMargin" id="kkK-UA-xnJ"/>
                                         </constraints>
