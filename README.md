@@ -1,10 +1,10 @@
 # SoundCloodDemo
 Simple iOS App that uses SoundCloud API to demostrate search and user's likes
 
-## Explanation
+### Explanation
 
-## Notable Features
+### Notable Features
 
-## Frameworks Used
+### Frameworks Used
 
-## Acknowledgements
+### Acknowledgements
