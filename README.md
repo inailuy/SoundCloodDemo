@@ -7,7 +7,7 @@ SoundCloodDemo is a iOS Application written in Swift that demostrates a bunch of
   SearchVC allows the user to search SoundClouds audio database in a form of a collection view. Each cell displays the image and title associated with each track. A user has the option to play tracks by clicking on the cell, share the track using the iOS share dialogue with a hold gesture and the option the refetch the content on this view with a downward pull to the collection view from the top of the collection view. 
   
 ### Notable Features
-- Background Audio 
+- Plays audio in the background 
 - Native use of iOS Controls (play,pause, rewind, fastfoward)
 - swipe to delete favorites 
 - swipe down to reload tableview data
