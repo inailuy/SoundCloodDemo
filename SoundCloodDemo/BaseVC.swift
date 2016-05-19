@@ -44,6 +44,7 @@ class BaseVC: UIViewController {
                 self.soundCloud.performLogin()
             } else {
                 self.activityIndicator.stopAnimating()
+                self.refreshControl.endRefreshing()
             }
         }
         alertController.addAction(OKAction)

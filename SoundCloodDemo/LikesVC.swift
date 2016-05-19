@@ -43,6 +43,7 @@ class LikesVC: BaseVC, UITableViewDataSource, UITableViewDelegate {
     @IBAction func playBarButtonPressed(sender: UIBarButtonItem) {
         AudioPlayer.sharedInstance.pausePlayMusic()
     }
+    
     //MARK: - TableView Delegate/DataSource
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return userFavorites.count

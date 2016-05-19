@@ -43,7 +43,14 @@ class DataWorker {
     
     @objc func loadSoundcloud() {
         var newArray = [Track]()
-        for likedTrackObject in appDelegate.soundCloud.tracksFavorited {
+        //Guarding against tracksFavorited being empty and crashing
+        guard let favorites = appDelegate.soundCloud.tracksFavorited
+        else {
+            NSNotificationCenter.defaultCenter().postNotificationName("TRIGGER_ALERT", object: "User has no favorites to display")
+            return
+        }
+        
+        for likedTrackObject in favorites {
             let request = NSFetchRequest()
             let entity = NSEntityDescription.entityForName("Track", inManagedObjectContext: appDelegate.managedObjectContext)
             request.entity = entity
@@ -132,6 +139,10 @@ class DataWorker {
     }
     //MARK:  Spotlight
     func addTrackToSpotlight(track: Track) {
+        if track.title!.isEmpty {
+            return
+        }
+        
         let attributeSet = CSSearchableItemAttributeSet(itemContentType: kUTTypeMP3 as String)
         let title = track.title
 
@@ -146,6 +157,9 @@ class DataWorker {
     }
     
     func deleteFromSpotlight(track:Track) {
+        if track.title!.isEmpty {
+            return
+        }
         CSSearchableIndex.defaultSearchableIndex().deleteSearchableItemsWithIdentifiers([track.title!], completionHandler: nil)
     }
 }
