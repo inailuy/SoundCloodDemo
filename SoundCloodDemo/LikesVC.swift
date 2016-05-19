@@ -5,8 +5,6 @@
 //  Created by inailuy on 4/29/16.
 //  Copyright © 2016 inailuy. All rights reserved.
 //
-
-import Foundation
 import UIKit
 
 class LikesVC: BaseVC, UITableViewDataSource, UITableViewDelegate {
@@ -16,11 +14,10 @@ class LikesVC: BaseVC, UITableViewDataSource, UITableViewDelegate {
     let PLAY = "PLAY"
     let PAUSE = "PAUSE"
     
+    @IBOutlet weak var playBarButton: UIBarButtonItem!
     @IBOutlet weak var tableView: UITableView!
     var userFavorites = [Track]()
-    
-    @IBOutlet weak var playBarButton: UIBarButtonItem!
-    
+    //MARK: -
     override func viewDidLoad() {
         super.viewDidLoad()
         activityIndicator.frame = view.frame
@@ -45,27 +42,6 @@ class LikesVC: BaseVC, UITableViewDataSource, UITableViewDelegate {
     
     @IBAction func playBarButtonPressed(sender: UIBarButtonItem) {
         AudioPlayer.sharedInstance.pausePlayMusic()
-    }
-    
-    func rateChanged() {
-        if AudioPlayer.sharedInstance.player.rate == 0.0 {
-            playBarButton.title = PLAY
-        } else {
-            playBarButton.title = PAUSE
-        }
-    }
-    
-    func loadData() {
-        self.refreshControl.endRefreshing()
-        DataWorker.sharedInstance.fetchAllTracks({ (array: NSArray) in
-            if !array.isEqualToArray(self.userFavorites) {
-                self.userFavorites = array as! [Track]
-                dispatch_async(dispatch_get_main_queue(), {
-                    self.tableView.reloadData()
-                    self.activityIndicator.stopAnimating()
-                })
-            }
-        })
     }
     //MARK: - TableView Delegate/DataSource
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -121,10 +97,6 @@ class LikesVC: BaseVC, UITableViewDataSource, UITableViewDelegate {
         cell?.selected = false
     }
     
-    func refreshTableView(refreshControl: UIRefreshControl) {
-        DataWorker.sharedInstance.startSoundcloud()
-    }
-    
     func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
         return true
     }
@@ -139,6 +111,10 @@ class LikesVC: BaseVC, UITableViewDataSource, UITableViewDelegate {
         }
     }
     
+    func refreshTableView(refreshControl: UIRefreshControl) {
+        DataWorker.sharedInstance.startSoundcloud()
+    }
+    
     func longPress(longPressGestureRecognizer: UILongPressGestureRecognizer) {
         if longPressGestureRecognizer.state == UIGestureRecognizerState.Began {
             let touchPoint = longPressGestureRecognizer.locationInView(self.view)
@@ -151,5 +127,26 @@ class LikesVC: BaseVC, UITableViewDataSource, UITableViewDelegate {
                 presentViewController(activityView, animated: true, completion:nil)
             }
         }
+    }
+    //MARK: MISC
+    func rateChanged() {
+        if AudioPlayer.sharedInstance.player.rate == 0.0 {
+            playBarButton.title = PLAY
+        } else {
+            playBarButton.title = PAUSE
+        }
+    }
+    
+    func loadData() {
+        self.refreshControl.endRefreshing()
+        DataWorker.sharedInstance.fetchAllTracks({ (array: NSArray) in
+            if !array.isEqualToArray(self.userFavorites) {
+                self.userFavorites = array as! [Track]
+                dispatch_async(dispatch_get_main_queue(), {
+                    self.tableView.reloadData()
+                    self.activityIndicator.stopAnimating()
+                })
+            }
+        })
     }
 }

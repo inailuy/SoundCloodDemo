@@ -5,8 +5,6 @@
 //  Created by inailuy on 4/29/16.
 //  Copyright © 2016 inailuy. All rights reserved.
 //
-
-import Foundation
 import UIKit
 
 class BaseVC: UIViewController {
@@ -15,7 +13,7 @@ class BaseVC: UIViewController {
     var imageDictionary = NSMutableDictionary()
     var appDelegate : AppDelegate!
     let refreshControl = UIRefreshControl()
-    
+    //MARK: -
     override func viewDidLoad() {
         appDelegate = UIApplication.sharedApplication().delegate  as! AppDelegate
         soundCloud = appDelegate.soundCloud
@@ -36,7 +34,7 @@ class BaseVC: UIViewController {
         UIApplication.sharedApplication().endReceivingRemoteControlEvents()
         resignFirstResponder()
     }
-    
+    //MARK: Notifications
     func loadAlert(notification:NSNotification) {
         let message = notification.object as! String
         

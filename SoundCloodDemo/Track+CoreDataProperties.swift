@@ -8,8 +8,6 @@
 //  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu
 //  to delete and recreate this implementation file for your updated model.
 //
-
-import Foundation
 import CoreData
 
 extension Track {
@@ -21,7 +19,7 @@ extension Track {
     @NSManaged var title: String?
     @NSManaged var streamable: NSNumber?
     @NSManaged var idValue: NSNumber?
-    
+    //MARK: -
     func addValues(likedTrackObject: LikedTrackObject) {
         if likedTrackObject.streamURL != nil {
             streamURL = likedTrackObject.streamURL.absoluteString

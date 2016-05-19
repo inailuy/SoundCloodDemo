@@ -5,7 +5,6 @@
 //  Created by inailuy on 4/29/16.
 //  Copyright © 2016 inailuy. All rights reserved.
 //
-
 import UIKit
 import CoreData
 import AVFoundation
@@ -97,9 +96,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         managedObjectContext.persistentStoreCoordinator = coordinator
         return managedObjectContext
     }()
-
     // MARK: - Core Data Saving support
-
     func saveContext () {
         if managedObjectContext.hasChanges {
             do {
@@ -113,6 +110,4 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
     }
-
 }
-

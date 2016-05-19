@@ -5,15 +5,13 @@
 //  Created by inailuy on 4/29/16.
 //  Copyright © 2016 inailuy. All rights reserved.
 //
-
-import Foundation
 import UIKit
 
 class SearchVC: BaseVC, UISearchBarDelegate, UICollectionViewDelegate, UICollectionViewDataSource {
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var collectionView: UICollectionView!
     var searchQueryResults = NSMutableArray()
-    
+    //MARK: -
     override func viewDidLoad() {
         super.viewDidLoad()
         activityIndicator.frame = CGRectMake(view.frame.size.width/2 - 25, view.frame.size.height/2 - 25, 50, 50);
@@ -25,7 +23,6 @@ class SearchVC: BaseVC, UISearchBarDelegate, UICollectionViewDelegate, UICollect
         let longPressRecognizer = UILongPressGestureRecognizer(target: self, action: #selector(SearchVC.longPress(_:)))
         self.view.addGestureRecognizer(longPressRecognizer)
     }
-    
     //MARK: - TableView Delegate/DataSource
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return searchQueryResults.count
@@ -54,7 +51,6 @@ class SearchVC: BaseVC, UISearchBarDelegate, UICollectionViewDelegate, UICollect
                         dispatch_async(dispatch_get_main_queue()) { () -> Void in
                             guard let data = data where error == nil else { return }
                             let image = UIImage(data: data)
-                            print(image)
                             imageView.image = image
                             self.imageDictionary.setValue(image, forKey: url.absoluteString)
                         }
@@ -96,7 +92,6 @@ class SearchVC: BaseVC, UISearchBarDelegate, UICollectionViewDelegate, UICollect
     //MARK: - UITextField Delegate
     func searchBarSearchButtonClicked(searchBar: UISearchBar) {
         view.window?.endEditing(true)
-        
         activityIndicator.startAnimating()
         handleQuery(searchBar.text!)
     }

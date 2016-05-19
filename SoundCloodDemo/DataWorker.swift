@@ -5,8 +5,6 @@
 //  Created by inailuy on 5/11/16.
 //  Copyright © 2016 inailuy. All rights reserved.
 //
-
-import Foundation
 import UIKit
 import CoreData
 import CoreSpotlight
@@ -17,7 +15,7 @@ class DataWorker {
     var tracks = [Track]()
     var fetchedObjects = NSArray()
     var appDelegate : AppDelegate!
-    
+    //MARK: -
     init () {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(loadSoundcloud), name: TRACKS_LOADED_NOTIFIACTION, object: nil)
         appDelegate = UIApplication.sharedApplication().delegate  as! AppDelegate
@@ -30,7 +28,7 @@ class DataWorker {
             print(error)
         }
     }
- 
+    //MARK: - SoundCloud API
     func startSoundcloud() {
         if !hasConnectivity() {
             NSNotificationCenter.defaultCenter().postNotificationName("TRIGGER_ALERT", object: "No Internet Connection")
@@ -44,7 +42,6 @@ class DataWorker {
     }
     
     @objc func loadSoundcloud() {
-        
         var newArray = [Track]()
         for likedTrackObject in appDelegate.soundCloud.tracksFavorited {
             let request = NSFetchRequest()
@@ -62,7 +59,6 @@ class DataWorker {
                 }
                 newArray.append(track!)
             } catch let error as NSError {
-                // failure
                 print("Fetch failed: \(error.localizedDescription)")
             }
         }
@@ -82,7 +78,13 @@ class DataWorker {
         tracks = newArray
         NSNotificationCenter.defaultCenter().postNotificationName("FINISHED_SOUNDCLOUD", object: nil)
     }
-    
+    // Used to download images asynchronously
+    func getDataFromUrl(url:NSURL, completion: ((data: NSData?, response: NSURLResponse?, error: NSError? ) -> Void)) {
+        NSURLSession.sharedSession().dataTaskWithURL(url) { (data, response, error) in
+            completion(data: data, response: response, error: error)
+            }.resume()
+    }
+    //MARK: COREDATA
     func fetchAllTracks(completion: (array: NSArray) -> Void) {
         let managedContext = appDelegate.managedObjectContext
         let fetchRequest = NSFetchRequest(entityName: "Track")
@@ -113,6 +115,7 @@ class DataWorker {
     func deleteTrack(track:Track, shouldSave: Bool) {
         deleteFromSpotlight(track)
         appDelegate.managedObjectContext.deleteObject(track)
+        
         if shouldSave {
             do {
                 try appDelegate.managedObjectContext.save()
@@ -121,19 +124,13 @@ class DataWorker {
             }
         }
     }
-    
-    func getDataFromUrl(url:NSURL, completion: ((data: NSData?, response: NSURLResponse?, error: NSError? ) -> Void)) {
-        NSURLSession.sharedSession().dataTaskWithURL(url) { (data, response, error) in
-            completion(data: data, response: response, error: error)
-            }.resume()
-    }
-    
+    //MARK: Connectivity
     func hasConnectivity() -> Bool {
         let reachability: Reachability = Reachability.reachabilityForInternetConnection()
         let networkStatus: Int = reachability.currentReachabilityStatus().rawValue
         return networkStatus != 0
     }
-    
+    //MARK:  Spotlight
     func addTrackToSpotlight(track: Track) {
         let attributeSet = CSSearchableItemAttributeSet(itemContentType: kUTTypeMP3 as String)
         let title = track.title
