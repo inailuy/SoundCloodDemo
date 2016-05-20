@@ -22,9 +22,14 @@ class BaseVC: UIViewController {
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(BaseVC.loadAlert(_:)), name: "TRIGGER_ALERT", object: nil)
         UIApplication.sharedApplication().beginReceivingRemoteControlEvents()
         becomeFirstResponder()
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(BaseVC.loadAlert(_:)), name: "TRIGGER_ALERT", object: nil)
     }
     
     override func viewDidDisappear(animated: Bool) {

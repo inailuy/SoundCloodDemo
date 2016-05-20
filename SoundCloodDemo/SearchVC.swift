@@ -108,6 +108,11 @@ class SearchVC: BaseVC, UISearchBarDelegate, UICollectionViewDelegate, UICollect
     }
     
     func handleQuery(searchText: String) {
+        if DataWorker.sharedInstance.hasConnectivity() != true {
+            NSNotificationCenter.defaultCenter().postNotificationName("TRIGGER_ALERT", object: "No Internet Connection")
+            return
+        }
+        
         let priority = DISPATCH_QUEUE_PRIORITY_DEFAULT
         dispatch_async(dispatch_get_global_queue(priority, 0)) {
             self.searchQueryResults = self.soundCloud.searchForTracksWithQuery(searchText)

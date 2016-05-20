@@ -29,6 +29,11 @@ class AudioPlayer : NSObject {
     }
 
     func playSongFromURL(songURL: NSURL) {
+        if DataWorker.sharedInstance.hasConnectivity() != true {
+            NSNotificationCenter.defaultCenter().postNotificationName("TRIGGER_ALERT", object: "No Internet Connection")
+            return
+        }
+        
         let scToken = NSUserDefaults.standardUserDefaults().objectForKey(SC_TOKEN) as! String
         let songUrlString = String(format: "%@?oauth_token=%@", songURL.absoluteURL, scToken)
 
@@ -150,11 +155,5 @@ class AudioPlayer : NSObject {
                 playTrack(likedObjects[index], with: nil)
             }
         }
-    }
-    //MARK: Connectivity
-    func hasConnectivity() -> Bool {
-        let reachability: Reachability = Reachability.reachabilityForInternetConnection()
-        let networkStatus: Int = reachability.currentReachabilityStatus().rawValue
-        return networkStatus != 0
     }
 }
