@@ -1,5 +1,5 @@
 # SoundCloodDemo
-SoundCloodDemo is a iOS Application written in Swift that demostrates programming concepts using the SoundCloud API. When the App is first launched the user is prompted to log in and get redirected to the SoundCloud log in page. Once logged in the user is shown 2 views, LikesVC and SearchVC. 
+SoundCloodDemo is a iOS Application written in Swift that demonstrates programming concepts using the SoundCloud API. When the App is first launched the user is prompted to log in and get redirected to the SoundCloud log in page. Once logged in the user is shown 2 views, LikesVC and SearchVC. 
 
 <img src="http://i.imgur.com/2xHaA4j.png" width="263" height="500">
 <img src="http://i.imgur.com/XbwvxvL.png" width="263" height="500">
